@@ -323,15 +323,16 @@ def neural_network():
     model.fit(train_X, train_Y, epochs=9)
     test_loss, test_acc = model.evaluate(test_X, test_Y)
     print('Test accuracy:', test_acc)
+    preds = []
+    predictions = model.predict(test_X)
+    for i in range(0, 18793):
+        preds.append(np.argmax(predictions[i, :]))
 
-    #prediction = model.predict(test_X)
-    #print(prediction)
-    #pred = pd.DataFrame.from_records(prediction)
-    #print(prediction.head(10))
+    #print(preds)
 
-    #cm = mets.confusion_matrix(preds, test_Y)
+    cm = mets.confusion_matrix(test_Y, preds)
 
-    #print(cm)
+    print(cm)
     #dictionary = {'back': 0, 'buffer_overflow': 1, 'ftp_write': 2, 'guess_passwd': 3, 'imap': 4, 'ipsweep': 5, 'land': 6,
     #              'loadmodule': 7, 'multihop': 8, 'neptune': 9, 'nmap': 10, 'normal': 11, 'perl': 12, 'phf': 13, 'pod': 14,
     #              'portsweep': 15, 'rootkit': 16, 'satan': 17, 'smurf': 18, 'teardrop': 19, 'warezmaster': 20}
